@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 from datetime import datetime
+import time
 
 st.set_page_config(
     page_title="Sistem Gudang",
@@ -37,6 +38,7 @@ if not os.path.exists("akun.csv"):
     df = pd.DataFrame(columns=[
         "Username",
         "Password",
+        "Role"
     ])
     df.to_csv("akun.csv", index=False)
     
@@ -247,6 +249,8 @@ else:
                 )
 
                 st.success("Barang berhasil dihapus")
+                time.sleep(1)
+                st.rerun()
 
     # ==========================
     # Barang Masuk
@@ -427,3 +431,83 @@ else:
                 file_name="riwayat_login.csv",
                 mime="text/csv"
             )
+            
+            st.subheader("Buat Akun")
+            username = st.text_input("Masukkan Username :")
+            password = st.text_input("Masukkan Password :")
+            role = st.selectbox(
+                "Role",
+                [
+                    "Admin",
+                    "User"
+                ]
+            )
+            
+            if st.button("Buat Akun"):
+                if username in akun["Username"].values:
+                    st.toast("Username Sudah ada!")
+                else:
+                    akun_baru = {
+                        "Username" : username,
+                        "Password" : password,
+                        "Role" : role
+                    }
+                        
+                    akun = pd.concat(
+                        [akun, pd.DataFrame([akun_baru])],
+                        ignore_index=True
+                    )
+                        
+                    akun.to_csv(    
+                        "akun.csv",
+                        index=False
+                    )
+                    st.toast("Berhasil Membuat Akun")
+                time.sleep(2)
+                st.rerun()
+                
+            
+            st.subheader("Hapus Akun")
+            
+            hapus_akun = st.selectbox(
+                "Pilih Akun",
+                ["-"] + list(akun["Username"])
+            )
+            
+            if st.button("Hapus Akun"):  
+                if hapus_akun != "-":
+                
+                    akun = akun[
+                        akun["Username"] != hapus_akun
+                    ]
+                
+                    akun.to_csv(
+                        "akun.csv",
+                        index=False
+                    )
+                
+                    st.toast("Akun berhasil dihapus")
+                    
+                    if hapus_akun == st.session_state.username:
+                        logout_time = {
+                            "Username" : st.session_state.username,
+                            "Role" : st.session_state.role,
+                            "Login" : st.session_state.waktu_login,
+                            "Logout" : datetime.now()
+                        }
+                                                
+                        riwayat_login = pd.concat(
+                            [riwayat_login, pd.DataFrame([logout_time])],
+                            ignore_index=True
+                       )
+                                                
+                        riwayat_login.to_csv(
+                            "riwayat_login.csv",
+                            index=False
+                        )     
+                        st.session_state.login = False
+                        st.session_state.role = None
+                        st.session_state.username = None
+                    
+                    time.sleep(2)
+                    st.rerun()
