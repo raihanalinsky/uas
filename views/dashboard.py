@@ -41,8 +41,8 @@ class DashboardView:
             data["total_supplier"]
         )
         
-        bm = self.controller.get_barang_masuk()
-        bk = self.controller.get_barang_keluar()
+        barang_masuk = self.controller.get_barang_masuk()
+        barang_keluar = self.controller.get_barang_keluar()
 
         grafik = {
             "Jenis": [
@@ -51,8 +51,8 @@ class DashboardView:
             ],
             
             "Jumlah": [
-                bm,
-                bk
+                barang_masuk,
+                barang_keluar
             ]
         }
 
