@@ -1,6 +1,5 @@
 from services.akun_service import AkunService
 
-
 class AkunController:
 
     def __init__(self):
@@ -42,5 +41,7 @@ class AkunController:
     # ======================
 
     def get_all_akun(self):
-
         return self.service.get_all_akun()
+    
+    def get_all_riwayat(self):
+        return self.service.get_all_riwayat()

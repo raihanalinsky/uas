@@ -1,10 +1,12 @@
 from models.akun_model import AkunModel
+from models.riwayat_login import RiwayatLoginModel
 
 class AkunService:
 
     def __init__(self):
 
         self.model = AkunModel()
+        self.riwayat_model = RiwayatLoginModel()
 
     def tambah_akun(
         self,
@@ -54,3 +56,6 @@ class AkunService:
     def get_all_akun(self):
 
         return self.model.load().to_list()
+    
+    def get_all_riwayat(self):
+        return self.riwayat_model.load().to_list()

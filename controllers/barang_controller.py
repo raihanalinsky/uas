@@ -88,5 +88,4 @@ class BarangController:
     # ======================
 
     def get_all_barang(self):
-
         return self.service.get_all_barang()
