@@ -30,7 +30,10 @@ class BarangView:
             )
 
         with tab2:
-
+            if st.session_state.role != "Admin":
+                st.error("Hanya Admin Yang dapat mengakses Fitur Ini!")
+                return
+            
             with st.form("barang"):
 
                 kode = st.text_input("Kode")

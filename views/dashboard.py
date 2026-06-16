@@ -1,4 +1,6 @@
 import streamlit as st
+import plotly.express as px
+import pandas as pd
 
 
 class DashboardView:
@@ -37,4 +39,33 @@ class DashboardView:
         c5.metric(
             "Supplier",
             data["total_supplier"]
+        )
+        
+        barang_masuk = self.controller.get_barang_masuk()
+        barang_keluar = self.controller.get_barang_keluar()
+
+        grafik = {
+            "Jenis": [
+                "Barang Masuk",
+                "Barang Keluar"
+            ],
+            "Jumlah": [
+                barang_masuk,
+                barang_keluar
+            ]
+        }
+
+        df = pd.DataFrame(grafik)
+
+        fig_bar = px.bar(
+            df,
+            x="Jenis",
+            y="Jumlah",
+            color="Jenis",
+            title="Perbandingan Barang Masuk dan Keluar"
+        )
+
+        st.plotly_chart(
+            fig_bar,
+            use_container_width=True
         )
