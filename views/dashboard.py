@@ -49,6 +49,7 @@ class DashboardView:
                 "Barang Masuk",
                 "Barang Keluar"
             ],
+            
             "Jumlah": [
                 bm,
                 bk
