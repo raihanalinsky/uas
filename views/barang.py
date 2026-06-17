@@ -69,7 +69,7 @@ class BarangView:
         with tab4:
             with st.form("keluar", clear_on_submit=True):
                 opsi = [f"{item['Kode']} - {item['Nama Barang']}" for item in barang]
-                kode = st.selectbox("Kode Barang Masuk", ["-"] + opsi)
+                kode = st.selectbox("Kode Barang Keluar", ["-"] + opsi)
 
                 jumlah = st.number_input("Jumlah Keluar", min_value=1)
 

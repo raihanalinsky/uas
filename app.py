@@ -81,6 +81,8 @@ st.sidebar.write(
 )
 
 if st.sidebar.button("Logout"):
+    
+    auth_controller.logout(st.session_state["username"])
 
     st.session_state.login = False
     st.session_state.username = None
