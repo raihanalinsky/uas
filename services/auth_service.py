@@ -1,6 +1,6 @@
 from models.akun_model import AkunModel
 from models.riwayat_login import RiwayatLoginModel
-from datetime import datetime
+from utils.helper import get_wib_time_now
 
 
 class AuthService:
@@ -25,7 +25,7 @@ class AuthService:
 
                 data = {
                     "Username": username,
-                    "Login": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "Login": get_wib_time_now(),
                     "Logout": "",
                 }
 

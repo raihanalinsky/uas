@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 
 #mengecek apakah role admin atau bukan
 def is_admin():
@@ -13,3 +14,6 @@ def get_barang_kode(selected):
         return None
     
     return selected.split("-")[0]
+
+def get_wib_time_now():
+    return datetime.now("Asia/Jakarta").strftime("%Y-%m-%d %H:%M:%S")

@@ -1,7 +1,6 @@
 from models.barang_model import BarangModel
 from models.transaksi_model import TransaksiModel
-
-from datetime import datetime
+from utils.helper import get_wib_time_now
 
 
 class BarangService:
@@ -113,7 +112,6 @@ class BarangService:
     # ======================
     # cari barang
     # ======================
-
     def cari_barang(self, keyword):
         barang = self.barang_model.load()
 
@@ -134,7 +132,6 @@ class BarangService:
     # ======================
     # barang masuk
     # ======================
-
     def barang_masuk(self, kode, jumlah):
         barang = self.barang_model.load()
 
@@ -150,7 +147,7 @@ class BarangService:
 
         self.transaksi_model.tambah_transaksi(
             {
-                "Tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Tanggal": get_wib_time_now(),
                 "Jenis": "Masuk",
                 "Kode": kode,
                 "Nama Barang": node.data["Nama Barang"],
@@ -185,7 +182,7 @@ class BarangService:
 
         self.transaksi_model.tambah_transaksi(
             {
-                "Tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Tanggal": get_wib_time_now(),
                 "Jenis": "Keluar",
                 "Kode": kode,
                 "Nama Barang": node.data["Nama Barang"],
@@ -198,6 +195,5 @@ class BarangService:
     # ======================
     # ambil semua barang
     # ======================
-
     def get_all_barang(self):
         return self.barang_model.load().to_list()
