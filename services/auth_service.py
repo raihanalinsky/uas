@@ -13,7 +13,7 @@ class AuthService:
     # ==================
     def login(self, username, password):
 
-        akun_list = self.model.get_all()
+        akun_list = self.model.load()
 
         current = akun_list.head
 
