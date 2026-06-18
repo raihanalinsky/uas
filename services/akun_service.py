@@ -3,14 +3,14 @@ from models.riwayat_login import RiwayatLoginModel
 
 
 class AkunService:
-
     def __init__(self):
-
         self.model = AkunModel()
         self.riwayat_model = RiwayatLoginModel()
 
+    # ============
+    # tambah akun
+    # ============
     def tambah_akun(self, username, password, role):
-
         akun = self.model.load()
 
         current = akun.head
@@ -29,8 +29,10 @@ class AkunService:
 
         return True, "Akun berhasil dibuat"
 
+    # ============
+    # hapus akun
+    # ============
     def hapus_akun(self, username):
-
         akun = self.model.load()
 
         hasil = akun.delete_by_key("Username", username)
@@ -43,9 +45,14 @@ class AkunService:
 
         return True, "Akun berhasil dihapus"
 
+    # ============
+    # semua akun
+    # ============
     def get_all_akun(self):
-
         return self.model.load().to_list()
 
+    # ==========================
+    # semua riwayat login
+    # ==========================
     def get_all_riwayat(self):
         return self.riwayat_model.load().to_list()

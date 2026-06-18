@@ -5,14 +5,12 @@ from datetime import datetime
 
 
 class BarangService:
-
     def __init__(self):
-
         self.barang_model = BarangModel()
         self.transaksi_model = TransaksiModel()
 
     # ======================
-    # Tambah Barang
+    # tambah barang
     # ======================
 
     def tambah_barang(self, kode, nama, kategori, supplier, stok, harga):
@@ -22,7 +20,7 @@ class BarangService:
             kode == ""
             or nama == ""
             or kategori == ""
-            or supplier == ""
+            or supplier == "-"
             or stok == ""
             or harga == ""
         ):
@@ -47,11 +45,10 @@ class BarangService:
         return True, "Barang berhasil ditambahkan"
 
     # ======================
-    # Hapus Barang
+    # hapus barang
     # ======================
 
     def hapus_barang(self, kode):
-
         barang = self.barang_model.load()
 
         hasil = barang.delete_by_key("Kode", kode)
@@ -63,6 +60,9 @@ class BarangService:
 
         return True, "Barang berhasil dihapus"
 
+    # ======================
+    # edit barang
+    # ======================
     def edit_barang(
         self,
         barang_pilihan,
@@ -89,16 +89,16 @@ class BarangService:
 
         if kode_baru != "":
             new_data["Kode"] = kode_baru
-            
+
         if nama_barang_baru != "":
             new_data["Nama Barang"] = nama_barang_baru
-            
+
         if kategori_baru != "":
             new_data["Kategori"] = kategori_baru
-            
+
         if stok_baru != 0:
             new_data["Stok"] = stok_baru
-            
+
         if harga_baru != 0:
             new_data["Harga"] = harga_baru
 
@@ -111,11 +111,10 @@ class BarangService:
         return True, "Berhasil Mengubah Barang"
 
     # ======================
-    # Cari Barang
+    # cari barang
     # ======================
 
     def cari_barang(self, keyword):
-
         barang = self.barang_model.load()
 
         hasil = []
@@ -133,11 +132,10 @@ class BarangService:
         return hasil
 
     # ======================
-    # Barang Masuk
+    # barang masuk
     # ======================
 
     def barang_masuk(self, kode, jumlah):
-
         barang = self.barang_model.load()
 
         node = barang.find(kode)
@@ -152,7 +150,7 @@ class BarangService:
 
         self.transaksi_model.tambah_transaksi(
             {
-                "Tanggal": datetime.now(),
+                "Tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "Jenis": "Masuk",
                 "Kode": kode,
                 "Nama Barang": node.data["Nama Barang"],
@@ -163,11 +161,10 @@ class BarangService:
         return True, "Barang masuk berhasil"
 
     # ======================
-    # Barang Keluar
+    # barang keluar
     # ======================
 
     def barang_keluar(self, kode, jumlah):
-
         barang = self.barang_model.load()
 
         node = barang.find(kode)
@@ -188,7 +185,7 @@ class BarangService:
 
         self.transaksi_model.tambah_transaksi(
             {
-                "Tanggal": datetime.now(),
+                "Tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "Jenis": "Keluar",
                 "Kode": kode,
                 "Nama Barang": node.data["Nama Barang"],
@@ -199,9 +196,8 @@ class BarangService:
         return True, "Barang keluar berhasil"
 
     # ======================
-    # Ambil Semua Barang
+    # ambil semua barang
     # ======================
 
     def get_all_barang(self):
-
         return self.barang_model.load().to_list()

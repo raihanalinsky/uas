@@ -2,24 +2,23 @@ import pandas as pd
 import os
 
 from models.linked_list import LinkedList
+from utils.path_helper import get_csv_path
 
 
 class RiwayatLoginModel:
-
-    FILE_PATH = "database/riwayat_login.csv"
+    FILE_PATH = get_csv_path("riwayat_login.csv")
 
     def __init__(self):
-
-        os.makedirs("database", exist_ok=True)
-
         if not os.path.exists(self.FILE_PATH):
 
             df = pd.DataFrame(columns=["Username", "Role", "Login", "Logout"])
 
             df.to_csv(self.FILE_PATH, index=False)
 
+    # ====================
+    # load riwayat login
+    # ====================
     def load(self):
-
         ll = LinkedList()
 
         df = pd.read_csv(self.FILE_PATH, dtype=str)
@@ -29,18 +28,25 @@ class RiwayatLoginModel:
 
         return ll
 
+    # ====================
+    # save riwayat login
+    # ====================
     def save(self, linked_list):
-
         pd.DataFrame(linked_list.to_list()).to_csv(self.FILE_PATH, index=False)
 
+    # ====================
+    # tambah riwayat login
+    # ====================
     def tambah_riwayat(self, data):
-
         df = pd.read_csv(self.FILE_PATH, dtype=str)
 
         df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
 
         df.to_csv(self.FILE_PATH, index=False)
 
+    # ======================
+    # update riwayat logout
+    # ======================
     def update_logout(self, username):
         df = pd.read_csv(self.FILE_PATH, dtype=str)
 
@@ -49,6 +55,8 @@ class RiwayatLoginModel:
         ].index
 
         if len(index) > 0:
-            df.loc[index[-1], "Logout"] = pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+            df.loc[index[-1], "Logout"] = pd.Timestamp.now().strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
 
             df.to_csv(self.FILE_PATH, index=False)

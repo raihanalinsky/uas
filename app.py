@@ -1,5 +1,8 @@
 import streamlit as st
 
+# ====================
+# import controller
+# ====================
 from controllers.auth_controller import AuthController
 from controllers.barang_controller import BarangController
 from controllers.supplier_controller import SupplierController
@@ -14,15 +17,16 @@ from views.supplier import SupplierView
 from views.laporan import LaporanView
 from views.akun import AkunView
 
+# ================================
+# title website
+# ================================
 st.set_page_config(
-    page_title="Warehouse Management System",
-    page_icon="📦",
-    layout="wide"
+    page_title="Warehouse Management System", page_icon="📦", layout="wide"
 )
 
-# ==========================
-# Session
-# ==========================
+# ==================================================
+# untuk menyimpan session login, username, dan role
+# ==================================================
 
 if "login" not in st.session_state:
     st.session_state.login = False
@@ -51,10 +55,7 @@ laporan_controller = LaporanController()
 # ==========================
 
 if not st.session_state.login:
-
-    LoginView(
-        auth_controller
-    ).render()
+    LoginView(auth_controller).render()
 
     st.stop()
 
@@ -66,22 +67,12 @@ if not st.session_state.login:
 st.sidebar.title("Warehouse Troops")
 
 menu = st.sidebar.selectbox(
-    "Menu",
-    [
-        "Dashboard",
-        "Barang",
-        "Supplier",
-        "Laporan",
-        "Akun"
-    ]
+    "Menu", ["Dashboard", "Barang", "Supplier", "Laporan", "Akun"]
 )
 
-st.sidebar.write(
-    f"Login sebagai : {st.session_state.username}"
-)
+st.sidebar.write(f"Login sebagai : {st.session_state.username}")
 
 if st.sidebar.button("Logout"):
-    
     auth_controller.logout(st.session_state["username"])
 
     st.session_state.login = False
@@ -91,37 +82,21 @@ if st.sidebar.button("Logout"):
     st.rerun()
 
 
-# ==========================
-# Routing
-# ==========================
+# ==================================
+# ketika memilih pages di sidebar
+# ==================================
 
 if menu == "Dashboard":
-
-    DashboardView(
-        dashboard_controller
-    ).render()
+    DashboardView(dashboard_controller).render()
 
 elif menu == "Barang":
-
-    BarangView(
-        barang_controller,
-        supplier_controller
-    ).render()
+    BarangView(barang_controller, supplier_controller).render()
 
 elif menu == "Supplier":
-
-    SupplierView(
-        supplier_controller
-    ).render()
+    SupplierView(supplier_controller).render()
 
 elif menu == "Laporan":
-
-    LaporanView(
-        laporan_controller
-    ).render()
+    LaporanView(laporan_controller).render()
 
 elif menu == "Akun":
-
-    AkunView(
-        akun_controller
-    ).render()
+    AkunView(akun_controller).render()

@@ -2,16 +2,13 @@ import pandas as pd
 import os
 
 from models.linked_list import LinkedList
+from utils.path_helper import get_csv_path
 
 
 class BarangModel:
-
-    FILE_PATH = "database/barang.csv"
+    FILE_PATH = get_csv_path("barang.csv")
 
     def __init__(self):
-
-        os.makedirs("database", exist_ok=True)
-
         if not os.path.exists(self.FILE_PATH):
 
             df = pd.DataFrame(
@@ -21,11 +18,9 @@ class BarangModel:
             df.to_csv(self.FILE_PATH, index=False)
 
     # ======================
-    # Load CSV -> LinkedList
+    # load barang
     # ======================
-
     def load(self):
-
         ll = LinkedList()
 
         df = pd.read_csv(self.FILE_PATH)
@@ -36,9 +31,7 @@ class BarangModel:
         return ll
 
     # ======================
-    # Save LinkedList -> CSV
+    # save barang
     # ======================
-
     def save(self, linked_list):
-
         pd.DataFrame(linked_list.to_list()).to_csv(self.FILE_PATH, index=False)

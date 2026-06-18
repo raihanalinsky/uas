@@ -2,7 +2,6 @@ from services.supplier_service import SupplierService
 
 
 class SupplierController:
-
     def __init__(self):
         self.service = SupplierService()
 

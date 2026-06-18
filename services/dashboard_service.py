@@ -1,15 +1,16 @@
 from models.barang_model import BarangModel
 from models.supplier_model import SupplierModel
 
+
 class DashboardService:
-
     def __init__(self):
-
         self.barang_model = BarangModel()
         self.supplier_model = SupplierModel()
 
+    # ========================================
+    # data yang dibutuhkan untuk di dashboard
+    # ========================================
     def get_dashboard_data(self):
-
         barang = self.barang_model.load()
 
         supplier = self.supplier_model.load()
@@ -28,10 +29,7 @@ class DashboardService:
             total_barang += 1
             total_stok += int(data["Stok"])
 
-            total_nilai += (
-                int(data["Stok"])
-                * float(data["Harga"])
-            )
+            total_nilai += int(data["Stok"]) * float(data["Harga"])
 
             if int(data["Stok"]) <= 5:
 
@@ -39,14 +37,12 @@ class DashboardService:
 
             current = current.next
 
-        total_supplier = len(
-            supplier.to_list()
-        )
+        total_supplier = len(supplier.to_list())
 
         return {
             "total_barang": total_barang,
             "total_stok": total_stok,
             "total_nilai": total_nilai,
             "stok_menipis": stok_menipis,
-            "total_supplier": total_supplier
+            "total_supplier": total_supplier,
         }
