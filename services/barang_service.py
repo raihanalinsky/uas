@@ -3,6 +3,7 @@ from models.transaksi_model import TransaksiModel
 
 from datetime import datetime
 
+
 class BarangService:
 
     def __init__(self):
@@ -14,18 +15,18 @@ class BarangService:
     # Tambah Barang
     # ======================
 
-    def tambah_barang(
-        self,
-        kode,
-        nama,
-        kategori,
-        supplier,
-        stok,
-        harga
-    ):
+    def tambah_barang(self, kode, nama, kategori, supplier, stok, harga):
 
         barang = self.barang_model.load()
-
+        if (
+            kode == ""
+            or nama == ""
+            or kategori == ""
+            or supplier == ""
+            or stok == ""
+            or harga == ""
+        ):
+            return False, "Semua Kolom Harus Diisi!"
         if barang.find(kode):
 
             return False, "Kode barang sudah ada"
@@ -37,7 +38,7 @@ class BarangService:
                 "Kategori": kategori,
                 "Supplier": supplier,
                 "Stok": stok,
-                "Harga": harga
+                "Harga": harga,
             }
         )
 
@@ -53,7 +54,7 @@ class BarangService:
 
         barang = self.barang_model.load()
 
-        hasil = barang.delete(kode)
+        hasil = barang.delete_by_key("Kode", kode)
 
         if not hasil:
             return False, "Barang tidak ditemukan"
@@ -61,6 +62,53 @@ class BarangService:
         self.barang_model.save(barang)
 
         return True, "Barang berhasil dihapus"
+
+    def edit_barang(
+        self,
+        barang_pilihan,
+        kode_baru,
+        nama_barang_baru,
+        kategori_baru,
+        stok_baru,
+        harga_baru,
+    ):
+        all_barang = self.barang_model.load()
+
+        if barang_pilihan == "-" or barang_pilihan == "":
+            return False, "Pilih Barang Dengan Benar"
+        if (
+            kode_baru == ""
+            and nama_barang_baru == ""
+            and kategori_baru == ""
+            and (stok_baru == "" or stok_baru == 0)
+            and (harga_baru == "" or harga_baru == 0)
+        ):
+            return False, "Minimal 1 kolom harus diisi!"
+
+        new_data = {}
+
+        if kode_baru != "":
+            new_data["Kode"] = kode_baru
+            
+        if nama_barang_baru != "":
+            new_data["Nama Barang"] = nama_barang_baru
+            
+        if kategori_baru != "":
+            new_data["Kategori"] = kategori_baru
+            
+        if stok_baru != 0:
+            new_data["Stok"] = stok_baru
+            
+        if harga_baru != 0:
+            new_data["Harga"] = harga_baru
+
+        hasil = all_barang.update_by_key("Kode", barang_pilihan, new_data)
+
+        if not hasil:
+            return False, "Gagal Mengedit Barang"
+
+        self.barang_model.save(all_barang)
+        return True, "Berhasil Mengubah Barang"
 
     # ======================
     # Cari Barang
@@ -88,11 +136,7 @@ class BarangService:
     # Barang Masuk
     # ======================
 
-    def barang_masuk(
-        self,
-        kode,
-        jumlah
-    ):
+    def barang_masuk(self, kode, jumlah):
 
         barang = self.barang_model.load()
 
@@ -112,7 +156,7 @@ class BarangService:
                 "Jenis": "Masuk",
                 "Kode": kode,
                 "Nama Barang": node.data["Nama Barang"],
-                "Jumlah": jumlah
+                "Jumlah": jumlah,
             }
         )
 
@@ -122,11 +166,7 @@ class BarangService:
     # Barang Keluar
     # ======================
 
-    def barang_keluar(
-        self,
-        kode,
-        jumlah
-    ):
+    def barang_keluar(self, kode, jumlah):
 
         barang = self.barang_model.load()
 
@@ -152,7 +192,7 @@ class BarangService:
                 "Jenis": "Keluar",
                 "Kode": kode,
                 "Nama Barang": node.data["Nama Barang"],
-                "Jumlah": jumlah
+                "Jumlah": jumlah,
             }
         )
 

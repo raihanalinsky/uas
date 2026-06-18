@@ -79,48 +79,96 @@ class LinkedList:
     # Hapus Barang
     # ======================
 
-    def delete(self, kode):
+    # def delete(self, kode):
 
-        current = self.head
-        prev = None
+    #     current = self.head
+    #     prev = None
 
-        while current:
+    #     while current:
 
-            if str(current.data["Kode"]) == str(kode):
+    #         if str(current.data["Kode"]) == str(kode):
 
-                if prev:
-                    prev.next = current.next
-                else:
-                    self.head = current.next
+    #             if prev:
+    #                 prev.next = current.next
+    #             else:
+    #                 self.head = current.next
 
-                return True
+    #             return True
 
-            prev = current
-            current = current.next
+    #         prev = current
+    #         current = current.next
 
-        return False
+    #     return False
 
     # ======================
     # Hapus Akun
     # ======================
 
-    def delete_by_username(self, username):
+    # def delete_by_username(self, username):
 
+    #     current = self.head
+    #     prev = None
+
+    #     while current:
+
+    #         if current.data["Username"] == username:
+
+    #             if prev:
+    #                 prev.next = current.next
+    #             else:
+    #                 self.head = current.next
+
+    #             return True
+
+    #         prev = current
+    #         current = current.next
+
+    #     return False
+
+    # def delete_by_nama_perusahaan(self, nama_perusahaan):
+    #     current = self.head
+    #     prev = None
+        
+    #     while current:
+    #         if current.data["Nama Perusahaan"] == nama_perusahaan:
+    #             if prev:
+    #                 prev.next = current.next
+    #             else:
+    #                 self.head = current.next
+                
+    #             return True
+        
+    #         prev = current
+    #         current = current.next
+    #     return False
+    
+    
+    def delete_by_key(self, key, value):
         current = self.head
         prev = None
-
+        
         while current:
-
-            if current.data["Username"] == username:
-
+            if str(current.data.get(key)) == str(value):
                 if prev:
                     prev.next = current.next
                 else:
                     self.head = current.next
-
+                
                 return True
-
+        
             prev = current
             current = current.next
-
         return False
+    
+    # Edit By Key
+    
+    def update_by_key(self, key, value, new_data):
+        current = self.head
+        
+        while current:
+            if str(current.data.get(key)) == str(value):
+                current.data.update(new_data)
+                return True
+            current = current.next
+        
+        return False 

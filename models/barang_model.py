@@ -15,20 +15,10 @@ class BarangModel:
         if not os.path.exists(self.FILE_PATH):
 
             df = pd.DataFrame(
-                columns=[
-                    "Kode",
-                    "Nama Barang",
-                    "Kategori",
-                    "Supplier",
-                    "Stok",
-                    "Harga"
-                ]
+                columns=["Kode", "Nama Barang", "Kategori", "Supplier", "Stok", "Harga"]
             )
 
-            df.to_csv(
-                self.FILE_PATH,
-                index=False
-            )
+            df.to_csv(self.FILE_PATH, index=False)
 
     # ======================
     # Load CSV -> LinkedList
@@ -51,9 +41,4 @@ class BarangModel:
 
     def save(self, linked_list):
 
-        pd.DataFrame(
-            linked_list.to_list()
-        ).to_csv(
-            self.FILE_PATH,
-            index=False
-        )
+        pd.DataFrame(linked_list.to_list()).to_csv(self.FILE_PATH, index=False)

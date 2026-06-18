@@ -1,6 +1,7 @@
 from models.akun_model import AkunModel
 from models.riwayat_login import RiwayatLoginModel
 
+
 class AkunService:
 
     def __init__(self):
@@ -8,12 +9,7 @@ class AkunService:
         self.model = AkunModel()
         self.riwayat_model = RiwayatLoginModel()
 
-    def tambah_akun(
-        self,
-        username,
-        password,
-        role
-    ):
+    def tambah_akun(self, username, password, role):
 
         akun = self.model.load()
 
@@ -27,13 +23,7 @@ class AkunService:
 
             current = current.next
 
-        akun.append(
-            {
-                "Username": username,
-                "Password": password,
-                "Role": role
-            }
-        )
+        akun.append({"Username": username, "Password": password, "Role": role})
 
         self.model.save(akun)
 
@@ -43,7 +33,7 @@ class AkunService:
 
         akun = self.model.load()
 
-        hasil = akun.delete_by_username(username)
+        hasil = akun.delete_by_key("Username", username)
 
         if not hasil:
 
@@ -56,6 +46,6 @@ class AkunService:
     def get_all_akun(self):
 
         return self.model.load().to_list()
-    
+
     def get_all_riwayat(self):
         return self.riwayat_model.load().to_list()

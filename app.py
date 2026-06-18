@@ -104,7 +104,8 @@ if menu == "Dashboard":
 elif menu == "Barang":
 
     BarangView(
-        barang_controller
+        barang_controller,
+        supplier_controller
     ).render()
 
 elif menu == "Supplier":
