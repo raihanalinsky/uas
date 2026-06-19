@@ -1,1 +1,38 @@
 Tanggal,Jenis,Kode,Nama Barang,Jumlah
+2025-01-19 15:00:19,Masuk,MJ001,Meja Gaming,10
+2025-02-19 15:00:31,Keluar,MJ001,Meja Gaming,3
+2025-03-19 15:01:25,Masuk,MJ001,Meja Gaming,13
+2025-03-19 15:01:32,Keluar,MJ001,Meja Gaming,10
+2025-04-19 15:31:08,Masuk,HM21,Sabun Nuvo 300ml,130
+2025-05-19 15:31:15,Masuk,KPT92,Laptop Ideapad Slim 1,12
+2025-06-19 15:31:22,Masuk,FSH051,Baju Anak,150
+2025-07-19 15:31:30,Keluar,FSH051,Baju Anak,100
+2025-08-19 15:31:42,Keluar,HM21,Sabun Nuvo 300ml,129
+2025-08-19 15:31:50,Keluar,KPT92,Laptop Ideapad Slim 1,8
+2025-09-19 15:00:19,Masuk,MJ001,Meja Gaming,10
+2025-09-19 15:00:31,Keluar,MJ001,Meja Gaming,3
+2025-10-19 15:01:25,Masuk,MJ001,Meja Gaming,13
+2025-10-19 15:01:32,Keluar,MJ001,Meja Gaming,10
+2025-10-19 15:31:08,Masuk,HM21,Sabun Nuvo 300ml,130
+2025-10-19 15:31:15,Masuk,KPT92,Laptop Ideapad Slim 1,12
+2025-11-19 15:31:22,Masuk,FSH051,Baju Anak,150
+2025-12-19 15:31:30,Keluar,FSH051,Baju Anak,100
+2025-12-19 15:31:42,Keluar,HM21,Sabun Nuvo 300ml,129
+2025-12-19 15:31:50,Keluar,KPT92,Laptop Ideapad Slim 1,8
+2026-01-19 15:34:44,Masuk,MJ001,Meja Gaming,9
+2026-01-19 15:34:56,Masuk,HM21,Sabun Nuvo 300ml,120
+2026-01-19 15:00:19,Masuk,MJ001,Meja Gaming,10
+2026-01-19 15:00:31,Keluar,MJ001,Meja Gaming,3
+2026-01-19 15:34:44,Keluar,MJ001,Meja Gaming,9
+2026-02-19 15:34:56,Keluar,HM21,Sabun Nuvo 300ml,120
+2026-02-19 15:34:44,Masuk,MJ001,Meja Gaming,9
+2026-02-19 15:34:56,Masuk,HM21,Sabun Nuvo 300ml,120
+2026-03-19 15:00:19,Masuk,MJ001,Meja Gaming,10
+2026-03-19 15:00:31,Keluar,MJ001,Meja Gaming,3
+2026-03-19 15:34:44,Keluar,MJ001,Meja Gaming,9
+2026-04-19 15:34:56,Keluar,HM21,Sabun Nuvo 300ml,120
+2026-05-19 15:34:44,Masuk,MJ001,Meja Gaming,9
+2026-05-19 15:34:56,Masuk,HM21,Sabun Nuvo 300ml,120
+2026-05-19 15:34:44,Keluar,MJ001,Meja Gaming,9
+2026-06-19 15:34:56,Keluar,HM21,Sabun Nuvo 300ml,120
+2026-06-19 15:34:56,Masuk,HM21,Sabun Nuvo 300ml,120

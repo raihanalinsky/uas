@@ -11,8 +11,8 @@ class BarangController:
     def hapus_barang(self, kode):
         return self.service.hapus_barang(kode)
 
-    def edit_barang(self, barang_pilihan, kb, nbb, ktb, sb, hb):
-        return self.service.edit_barang(barang_pilihan, kb, nbb, ktb, sb, hb)
+    def edit_barang(self, barang_pilihan, kb, nbb, ktb, splr, sb, hb):
+        return self.service.edit_barang(barang_pilihan, kb, nbb, ktb, splr, sb, hb)
 
     def barang_masuk(self, kode, jumlah):
         return self.service.barang_masuk(kode, jumlah)

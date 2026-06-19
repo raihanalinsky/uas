@@ -43,7 +43,10 @@ class BarangView:
 
                     kode_barang = st.text_input("Kode")
                     nama_barang = st.text_input("Nama Barang")
-                    kategori_barang = st.text_input("Kategori")
+                    kategori_barang = st.selectbox(
+                        "Pilih Kategori",
+                        ["-"] + ["Furnitur", "Elektronik", "Fashion", "Home Care"],
+                    )
 
                     supplier = st.selectbox(
                         "Pilih Supplier",
@@ -90,7 +93,15 @@ class BarangView:
 
                     nama_barang_baru = st.text_input("Nama Barang Baru")
 
-                    kategori_baru = st.text_input("Kategori Baru")
+                    kategori_baru = st.selectbox(
+                        "Pilih Kategori",
+                        ["-"] + ["Furnitur", "Elektronik", "Fashion", "Home Care"],
+                    )
+                    
+                    supplier_baru = st.selectbox(
+                        "Supplier Baru",
+                        ["-"] + [x["Nama Perusahaan"] for x in all_supplier],
+                    )
 
                     stok_baru = st.number_input("Stok Baru", min_value=0)
 
@@ -104,6 +115,7 @@ class BarangView:
                             kode_baru,
                             nama_barang_baru,
                             kategori_baru,
+                            supplier_baru,
                             stok_baru,
                             harga_baru,
                         )

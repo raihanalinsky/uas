@@ -11,7 +11,7 @@ class LaporanView:
 
         transaksi = self.controller.get_laporan_transaksi() #mengambil semua laporan transaksi barang masuk dan keluar
 
-        df = pd.DataFrame(transaksi) 
+        df = pd.DataFrame(transaksi[::-1]) 
 
         st.dataframe(df, use_container_width=True) #menampilkan seluruh data transaksi
 

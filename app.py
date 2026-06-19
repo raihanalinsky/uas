@@ -87,7 +87,7 @@ if st.sidebar.button("Logout"):
 # ==================================
 
 if menu == "Dashboard":
-    DashboardView(dashboard_controller).render()
+    DashboardView(dashboard_controller, laporan_controller).render()
 
 elif menu == "Barang":
     BarangView(barang_controller, supplier_controller).render()

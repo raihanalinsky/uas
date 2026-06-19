@@ -18,7 +18,7 @@ class BarangService:
         if (
             kode == ""
             or nama == ""
-            or kategori == ""
+            or kategori == "-"
             or supplier == "-"
             or stok == ""
             or harga == ""
@@ -68,6 +68,7 @@ class BarangService:
         kode_baru,
         nama_barang_baru,
         kategori_baru,
+        supplier_baru,
         stok_baru,
         harga_baru,
     ):
@@ -78,7 +79,8 @@ class BarangService:
         if (
             kode_baru == ""
             and nama_barang_baru == ""
-            and kategori_baru == ""
+            and kategori_baru == "-"
+            and supplier_baru == "-"
             and (stok_baru == "" or stok_baru == 0)
             and (harga_baru == "" or harga_baru == 0)
         ):
@@ -92,9 +94,12 @@ class BarangService:
         if nama_barang_baru != "":
             new_data["Nama Barang"] = nama_barang_baru
 
-        if kategori_baru != "":
+        if kategori_baru != "-":
             new_data["Kategori"] = kategori_baru
 
+        if supplier_baru != "-":
+            new_data["Supplier"] = supplier_baru
+        
         if stok_baru != 0:
             new_data["Stok"] = stok_baru
 

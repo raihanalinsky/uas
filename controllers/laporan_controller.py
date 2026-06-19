@@ -1,4 +1,5 @@
 from services.laporan_service import LaporanService
+import pandas as pd
 
 
 class LaporanController:
@@ -13,3 +14,6 @@ class LaporanController:
 
     def total_barang_keluar(self):
         return self.service.total_barang_keluar()
+    
+    def get_all_laporan_bulanan(self):
+        return self.service.laporan_per_bulan()
