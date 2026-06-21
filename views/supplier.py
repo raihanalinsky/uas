@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import time
 
+from utils.helper import is_admin
+
 
 class SupplierView:
     def __init__(self, controller):
@@ -25,80 +27,83 @@ class SupplierView:
 
         # tab untuk menambahkan supplier
         with tab1:
-            with st.form("supplier", clear_on_submit=True):
+            if is_admin():
+                with st.form("supplier", clear_on_submit=True):
 
-                perusahaan = st.text_input("Nama Perusahaan")
+                    perusahaan = st.text_input("Nama Perusahaan")
 
-                alamat = st.text_input("Alamat")
+                    alamat = st.text_input("Alamat")
 
-                telpon = st.text_input("No Telpon")
+                    telpon = st.text_input("No Telpon")
 
-                email = st.text_input("Email")
+                    email = st.text_input("Email")
 
-                pic = st.text_input("PIC")
+                    pic = st.text_input("PIC")
 
-                if st.form_submit_button("Tambah Supplier"):
-                    status, pesan = self.controller.tambah_supplier(
-                        perusahaan, alamat, telpon, email, pic
-                    )
+                    if st.form_submit_button("Tambah Supplier"):
+                        status, pesan = self.controller.tambah_supplier(
+                            perusahaan, alamat, telpon, email, pic
+                        )
 
-                    # mengecek apakah berhasil menambahkan supplier atau tidak
-                    if status:
-                        st.success(pesan)
-                        time.sleep(1)
-                        st.rerun()
-                    else:
-                        st.error(pesan)
+                        # mengecek apakah berhasil menambahkan supplier atau tidak
+                        if status:
+                            st.success(pesan)
+                            time.sleep(1)
+                            st.rerun()
+                        else:
+                            st.error(pesan)
 
         # tab untuk mengedit supplier
         with tab2:
-            with st.form("edit", clear_on_submit=True):
-                # untuk memilih supplier menggunakan selectbox
-                supplier = st.selectbox(
-                    "Supplier", ["-"] + [x["Nama Perusahaan"] for x in all_supplier]
-                )
-
-                st.divider()  # garis
-
-                perusahaan = st.text_input("Nama Perusahaan")
-
-                alamat = st.text_input("Alamat")
-
-                telpon = st.text_input("No Telpon")
-
-                email = st.text_input("Email")
-
-                pic = st.text_input("PIC")
-
-                if st.form_submit_button("Submit"):
-
-                    status, pesan = self.controller.edit_supplier(
-                        supplier, perusahaan, alamat, telpon, email, pic
+            if is_admin():
+                with st.form("edit", clear_on_submit=True):
+                    # untuk memilih supplier menggunakan selectbox
+                    supplier = st.selectbox(
+                        "Supplier", ["-"] + [x["Nama Perusahaan"] for x in all_supplier]
                     )
 
-                    # mengecek apakah berhasil menambahkan supplier atau tidak
-                    if status:
-                        st.toast(pesan)
-                        time.sleep(1)
-                        st.rerun()
-                    else:
-                        st.toast(pesan)
+                    st.divider()  # garis
+
+                    perusahaan = st.text_input("Nama Perusahaan")
+
+                    alamat = st.text_input("Alamat")
+
+                    telpon = st.text_input("No Telpon")
+
+                    email = st.text_input("Email")
+
+                    pic = st.text_input("PIC")
+
+                    if st.form_submit_button("Submit"):
+
+                        status, pesan = self.controller.edit_supplier(
+                            supplier, perusahaan, alamat, telpon, email, pic
+                        )
+
+                        # mengecek apakah berhasil menambahkan supplier atau tidak
+                        if status:
+                            st.toast(pesan)
+                            time.sleep(1)
+                            st.rerun()
+                        else:
+                            st.toast(pesan)
 
         # tab untuk menghapus supplier
         with tab3:
-            with st.form("hapus", clear_on_submit=True):
+            if is_admin():
+                with st.form("hapus", clear_on_submit=True):
 
-                perusahaan = st.selectbox(
-                    "Supplier", ["-"] + [x["Nama Perusahaan"] for x in all_supplier]
-                )
+                    perusahaan = st.selectbox(
+                        "Supplier", ["-"] + [x["Nama Perusahaan"] for x in all_supplier]
+                    )
 
-                if st.form_submit_button("Submit"):
-                    status, pesan = self.controller.hapus_supplier(perusahaan)
-                    
-                    # mengecek apakah berhasil menambahkan supplier atau tidak
-                    if status:
-                        st.toast(pesan)
-                        time.sleep(1)
-                        st.rerun()
-                    else:
-                        st.toast(pesan)
+                    if st.form_submit_button("Submit"):
+                        status, pesan = self.controller.hapus_supplier(perusahaan)
+
+                        # mengecek apakah berhasil menambahkan supplier atau tidak
+                        if status:
+                            st.toast(pesan)
+                            time.sleep(1)
+                            st.rerun()
+                        else:
+                            st.toast(pesan)

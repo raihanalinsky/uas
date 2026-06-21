@@ -38,7 +38,6 @@ class AkunService:
         hasil = akun.delete_by_key("Username", username)
 
         if not hasil:
-
             return False, "Akun tidak ditemukan"
 
         self.model.save(akun)
