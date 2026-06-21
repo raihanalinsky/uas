@@ -10,6 +10,9 @@ class AkunController:
 
     def hapus_akun(self, username):
         return self.service.hapus_akun(username)
+    
+    def edit_akun(self, pilih_akun, username, password, role):
+        return self.service.edit_akun(pilih_akun, username, password, role)
 
     def get_all_akun(self):
         return self.service.get_all_akun()

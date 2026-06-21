@@ -12,7 +12,7 @@ class AkunService:
     # ============
     def tambah_akun(self, username, password, role):
         akun = self.model.load()
-        
+
         if username == "" or password == "":
             return False, "Username dan Password wajib diisi!"
 
@@ -46,6 +46,36 @@ class AkunService:
         self.model.save(akun)
 
         return True, "Akun berhasil dihapus"
+
+    # ======================
+    # edit akun
+    # ======================
+    def edit_akun(self, akun_pilihan, username_baru, password_baru, role_baru):
+        akun = self.model.load()
+
+        if akun_pilihan == "-" or akun_pilihan == "":
+            return False, "Pilih Akun Dengan Benar"
+        if username_baru == "" and password_baru == "" and role_baru == "-":
+            return False, "Minimal 1 kolom harus diisi!"
+
+        new_data = {}
+
+        if username_baru != "":
+            new_data["Username"] = username_baru
+
+        if password_baru != "":
+            new_data["Password"] = password_baru
+
+        if role_baru != "-":
+            new_data["Role"] = role_baru
+
+        hasil = akun.update_by_key("Username", akun_pilihan, new_data)
+
+        if not hasil:
+            return False, "Gagal Mengedit Akun"
+
+        self.model.save(akun)
+        return True, "Berhasil Mengubah Akun"
 
     # ============
     # semua akun

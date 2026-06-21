@@ -17,11 +17,15 @@ class AkunView:
                 self.controller.get_all_akun()
             )  # meminta semua data akun dari akun service lewat akun controller
 
+            username_list = [
+                item["Username"] for item in self.controller.get_all_akun()
+            ]
+
             st.dataframe(
                 pd.DataFrame(akun), use_container_width=True
             )  # menampilkan seluruh data akun
-            tab1, tab2, tab3 = st.tabs(  # membuat tabs
-                ["Tambah Akun", "Hapus Akun", "Riwayat Login"]
+            tab1, tab2, tab3, tab4 = st.tabs(  # membuat tabs
+                ["Tambah Akun", "Hapus Akun", "Edit Akun", "Riwayat Login"]
             )
 
             # tab untuk menambahkan akun
@@ -41,13 +45,9 @@ class AkunView:
 
                         # menampilkan hasil
                         self.show_result(status, pesan)
-            
-            #tab untuk menghapus akun
-            with tab2:
-                username_list = [
-                    item["Username"] for item in self.controller.get_all_akun()
-                ]
 
+            # tab untuk menghapus akun
+            with tab2:
                 hapus_akun = st.selectbox("Pilih Akun", ["-"] + username_list)
 
                 if st.button("Hapus Akun"):
@@ -56,6 +56,27 @@ class AkunView:
                     self.show_result(status, pesan)
 
             with tab3:
+                with st.form("edit akun", clear_on_submit=True):
+                    pilih_akun = st.selectbox("Pilih Akun", ["-"] + username_list)
+
+                    st.divider()
+
+                    username = st.text_input("Username")
+
+                    password = st.text_input("Password")
+
+                    role = st.selectbox("Role", ["-"] + ["Admin", "User"])
+
+                    if st.form_submit_button("edit Akun"):
+
+                        status, pesan = self.controller.edit_akun(
+                            pilih_akun, username, password, role
+                        )
+
+                        # menampilkan hasil
+                        self.show_result(status, pesan)
+
+            with tab4:
                 riwayat_list = self.controller.get_all_riwayat()
 
                 st.dataframe(pd.DataFrame(riwayat_list[::-1]), use_container_width=True)
