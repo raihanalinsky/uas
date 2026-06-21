@@ -12,6 +12,9 @@ class AkunService:
     # ============
     def tambah_akun(self, username, password, role):
         akun = self.model.load()
+        
+        if username == "" or password == "":
+            return False, "Username dan Password wajib diisi!"
 
         current = akun.head
 
