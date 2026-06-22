@@ -3,6 +3,7 @@ import os
 
 from models.linked_list import LinkedList
 from utils.path_helper import get_csv_path
+from utils.path_helper import get_wib_time_now
 
 
 class RiwayatLoginModel:
@@ -55,8 +56,6 @@ class RiwayatLoginModel:
         ].index
 
         if len(index) > 0:
-            df.loc[index[-1], "Logout"] = pd.Timestamp.now().strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
+            df.loc[index[-1], "Logout"] = get_wib_time_now()
 
             df.to_csv(self.FILE_PATH, index=False)
