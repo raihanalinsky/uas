@@ -3,7 +3,7 @@ import os
 
 from models.linked_list import LinkedList
 from utils.path_helper import get_csv_path
-from utils.path_helper import get_wib_time_now
+from utils.helper import get_wib_time_now
 
 
 class RiwayatLoginModel:
